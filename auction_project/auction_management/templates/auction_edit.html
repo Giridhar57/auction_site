@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Auction</title>
+    <style>
+        /* Add this CSS to your template or in a separate .css file */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="datetime-local"],
+input[type="number"],
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <a href="{%url 'auction_list'%}">Back</a>
+    <div>
+        <h2>Create Auction</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" id="start_time" value="{{auction.start_time}}" name="start_time" required><br><br>
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" id="end_time" value="{{auction.end_time}}" name="end_time" required><br><br>
+            <label for="start_price">Start Price:</label>
+            <input type="number" id="start_price" name="start_price" value="{{auction.start_price}}" required><br><br>
+            <label for="item_name">Item Name:</label>
+            <input type="text" id="item_name" name="item_name" value="{{auction.item_name}}" required><br><br>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

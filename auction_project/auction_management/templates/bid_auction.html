@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ auction.item_name }}</title>
+    <style>
+        /* Add this CSS to your template or in a separate .css file */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <a href="{%url 'auction_detail' auction.id%}">Back</a>
+    <div>
+        <h2>Bid the auction: <i>{{ auction.item_name }}</i></h2>
+        <p>Start Time: {{ auction.start_time }}</p>
+        <p>End Time: {{ auction.end_time }}</p>
+        <p>Start Price: {{ auction.start_price }}</p>
+        <p>Winner: {% if auction.winner %}{{ auction.winner.username }}{% else %}Not yet determined{% endif %}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="amount">Amount:</label>
+            <input type="number" min="{{auction.start_price}}" id="amoun" name="amount">
+            <button type="submit">Place Bid</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ auction.item_name }}</title>
+    <style>
+        /* Add this CSS to your template or in a separate .css file */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+h2, h3, h4 {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.admin-actions {
+    margin-top: 20px;
+}
+
+.admin-actions a {
+    margin-right: 10px;
+}
+
+.delete-action {
+    color: red;
+}
+
+.bid-button {
+    background-color: #28A745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.bid-button:hover {
+    background-color: #218838;
+}
+
+.bid-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+    </style>
+</head>
+<body>
+    <a href="{%url 'auction_list'%}">Back</a><br><br>
+    <div>
+        <a href="{%url 'view_bids' auction.id%}"><b>View Bids</b></a><br><br>
+        {%if highest_bidder%}
+        <h3>Highest Bidder until now is <i style="color: red;">{{highest_bidder.user.username}}</i> with <i style="color: green;">Rs.{{highest_bidder.amount}}</i></h3>
+        {%else%}
+        <h4>No Biddings yet!!</h4>
+        {%endif%}
+        <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;color:rgb(205, 30, 30)">{{ auction.item_name }}</h2>
+        <p>Start Time: {{ auction.start_time }}</p>
+        <p>End Time: {{ auction.end_time }}</p>
+        <p>Start Price: {{ auction.start_price }}</p>
+        <p>Winner: {% if auction.winner %}{{ auction.winner.username }}{% else %}Not yet determined{% endif %}</p>
+        {%if auction.amount%}
+        <p>Bidded for: {{auction.amount}}</p>
+        {%endif%}
+        {%if user.is_superuser%}
+        <h3>Welcome Admin</h3>
+        <a href="{%url 'auction_edit' auction.id%}">Edit</a><br><br>
+        <a href="{%url 'auction_delete' auction.id%}" style="color: red;">Delete</a><br><br>
+        {%endif%}
+        {%if auction.live%}
+        {%if bidded_value%}
+        <p>You Bidded for: Rs.{{bidded_value.amount}}</p>
+        <a href="{%url 'bid_edit' auction.id%}">Place new Bid</a>
+        {%else%}
+        <a href="{%url 'bid_auction' auction.id%}">Bid this Auction</a>
+        {%endif%}
+        {%endif%}
+    </div>
+</body>
+</html>
