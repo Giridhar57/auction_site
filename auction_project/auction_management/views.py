@@ -73,7 +73,7 @@ def auction_list(request):
                 auction.winner=highest_bid[0].user
                 auction.save()
             auction.status="Auction Completed"
-    return render(request, 'auction_list.html', {'auctions': auctions,'user':user,'token':token})
+    return render(request, 'auction_list.html', {'auctions': auctions,'user':user})
 
 @login_required
 def auction_detail(request,pk):
