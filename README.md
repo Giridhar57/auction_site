@@ -1,5 +1,6 @@
 # auction_site
-In this project I have included both password based login and token based authentication. But login based authentication was implemented fully and for some tasks token based authentication was implemented.
+In this project I have included both password based login and token based authentication. But login based authentication was implemented fully and for some tasks token based authentication was implemented.<br>
+The UI is very basic since I am not so good in it, so please don't mind.
 # Admin:
 Admin was given perissions for entire CURD operations on Auctions and delete permission for managing user.
 <img width="960" alt="image" src="https://github.com/Giridhar57/auction_site/assets/80587128/31917a4b-b13b-4a02-98d8-27fb92b068d1">
